@@ -9,10 +9,13 @@
     {
 
         <div class="col-md-3">
-            <h4>@comicBook.DisplayText</h4>
-            <img src="/Images/@comicBook.CoverImageFileName"
-                 alt="@comicBook.DisplayText"
-                 class="img-responsive" />
+            @*new { id = comicBook.Id --> anonymus type, es porque la funcion recibe un prametro de tipo object*@
+            <h4>@Html.ActionLink(comicBook.DisplayText, "Detail", new { id = comicBook.Id })</h4>
+            <a href="@Url.Action("Detail", new { id = comicBook.Id })">
+                <img src="/Images/@comicBook.CoverImageFileName"
+                     alt="@comicBook.DisplayText"
+                     class="img-responsive" />
+            </a>
         </div>
 
     }
