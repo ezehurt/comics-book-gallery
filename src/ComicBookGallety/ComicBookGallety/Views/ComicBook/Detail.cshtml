@@ -27,10 +27,23 @@
         <div>
             @Html.Raw(description)
         </div>
-        <div>
-            @Html.Raw(artists)
-        </div>
 
-    </div>
+        @if (artists.Length > 0)
+        {
+            <div>
+                <h5>Artist:</h5>
+                <ul>
+                    @foreach (var artist in artists)
+                    {
+                        <li>
+                            @artist
+                        </li>
+                    }
+                </ul>
+
+            </div>
+        }
+
+
 </body>
 </html>
