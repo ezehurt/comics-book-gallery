@@ -11,6 +11,7 @@ namespace ComicBookGallety.Controllers
     public class ComicBookController : Controller
     {
         private ComicBookRepository _comicBookRepository = null;
+       
 
         public ComicBookController()
         {
@@ -26,7 +27,13 @@ namespace ComicBookGallety.Controllers
             }
              var comicBook = _comicBookRepository.GetComicBook(id.Value);
             return View(comicBook);
-    }
+        }
+        public ActionResult Index()
+        {
+            var comicBookList = _comicBookRepository.GetComicBooks();
+
+            return View(comicBookList);
+        }
 
 };
 
