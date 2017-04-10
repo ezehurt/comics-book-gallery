@@ -1,4 +1,5 @@
-﻿using ComicBookGallety.Models;
+﻿using ComicBookGallety.Data;
+using ComicBookGallety.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,23 +10,21 @@ namespace ComicBookGallety.Controllers
 {
     public class ComicBookController : Controller
     {
-        public ActionResult Detail()
-        {
-            var comicBook = new ComicBook()
-            {
-                SeriesTitle = "The amazing Spider Man",
-                IssueNumber = 700,
-                DescriptionHtml = "<p>Final issue! Witness the final hours of Doctor Octopus' life and his one, last, great act of revenge! Even if Spider-Man survives... <strong>will Peter Parker?</strong></p>",
-                Artists = new Artist[] {
-                    new Artist {Role= "Script", Name= "Dan Slott"},
-                    new Artist {Role= "Inks", Name= "Humberto Ramos"},
-                    new Artist {Role= "Inks", Name= "Victor Olazaba"},
-                    new Artist {Role= "Letters", Name= "Chris Eliopoulos"},
-                    }
-            };
-    
+        private ComicBookRepository _comicBookRepository = null;
 
-            
+        public ComicBookController()
+        {
+            _comicBookRepository = new ComicBookRepository();
+        }
+        
+
+        public ActionResult Detail(int? id)
+        {
+            if(id == null)
+            {
+                return HttpNotFound();
+            }
+             var comicBook = _comicBookRepository.GetComicBook(id.Value);
             return View(comicBook);
     }
 
